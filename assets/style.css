@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.animations {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 105vh 0;
+}
+.animations .left,
+.animations .right {
+    display: flex;
+    width: 200px;
+    height: 150px;
+    background: burlywood;
+}
+.animations .left {
+    margin: 0 7px 0 auto;
+}
+.animations .right {
+    margin: 0 auto 0 8px;
+}
+.animations svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
