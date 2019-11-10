@@ -1,35 +1,39 @@
 var left, right;
 (function() {
     var rightOpts = {
-        selector: '.right svg',
-        duration: '2000',
+        selector: '.walkway-animation svg',
+        duration: '1000',
         // can pass in a function or a string like 'easeOutQuint'
-        easing: function (t) { return t * t },
+        easing: 'easeInQuad',
     };
     var leftOpts = {
-        container: document.querySelector('.left'), // the dom element
+        container: document.querySelector('.lottie-animation'), // the dom element
         renderer: 'svg',
         loop: true,
         autoplay: true,
         path: './assets/froggie.json',
     };
+    var config = {
+        parent: 'animations',
+        left: leftOpts,
+        right: rightOpts,
+    };
+    config['right']['selector'] = '.' + config.parent + ' ' + rightOpts['selector'];
     window.addEventListener('load', function() {
-        anim({
-            left: leftOpts,
-            right: rightOpts,
-        });
+        anim(config);
     });
     window.addEventListener('scroll', function() {
-        anim({
-            left: leftOpts,
-            right: rightOpts,
-        });
+        anim(config);
     });
 })();
 
 function anim(opts) {
+    var parentClassName = '.animations';
     var leftOpts = opts['left'];
     var rightOpts = opts['right'];
+    if ('parent' in opts) {
+        parentClassName = '.' + opts['parent'];
+    }
     if (('undefined' == typeof right)
         || (!right)) {
         right = new Walkway(rightOpts);
@@ -39,18 +43,18 @@ function anim(opts) {
         left = lottie.loadAnimation(leftOpts);
         left.stop();
     }
-    scrollHandler('.animations', function() {
+    scrollHandler(parentClassName, function() {
         left.play();
-        if (!document.querySelector(right.selector).classList.contains('finished')) {
+        if (!document.querySelector(right.selector).parentNode.classList.contains('finished')) {
             right.draw(
                 function () {
-                    document.querySelector(right.selector).classList.add('finished');
+                    document.querySelector(right.selector).parentNode.classList.add('finished');
                 }
             );
         }
     }, function() {
         left.stop();
-        document.querySelector(right.selector).classList.remove('finished');
+        document.querySelector(right.selector).parentNode.classList.remove('finished');
         right = new Walkway(rightOpts);
     });
 }

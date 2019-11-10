@@ -8,17 +8,17 @@ body {
     align-items: center;
     margin: 105vh 0;
 }
-.animations .left,
-.animations .right {
+.animations .lottie-animation,
+.animations .walkway-animation {
     display: flex;
     width: 200px;
     height: 150px;
     background: burlywood;
 }
-.animations .left {
+.animations .lottie-animation {
     margin: 0 7px 0 auto;
 }
-.animations .right {
+.animations .walkway-animation {
     margin: 0 auto 0 8px;
 }
 .animations svg {
