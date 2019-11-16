@@ -79,9 +79,10 @@ function scrollHandler(selector, enterHandler, leaveHandler, options) {
     Array.prototype.forEach.call(collection, function(i) {
         var itemCR = i.getBoundingClientRect();
         var visibleTopPart =  itemCR.top > delta && itemCR.top < wH;
+        var visibleCenterPart = itemCR.top <= delta && itemCR.bottom >= delta;
         var visibleBottomPart = itemCR.bottom > delta && itemCR.bottom < wH;
-        var method = (visibleTopPart || visibleBottomPart) ? 'add' : 'remove';
 
+        var method = (visibleTopPart || visibleBottomPart || visibleCenterPart) ? 'add' : 'remove';
         i.classList[method](flagClass);
 
         if (i.classList.contains(flagClass)) {
